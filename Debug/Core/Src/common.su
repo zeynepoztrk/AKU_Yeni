@@ -1,0 +1,5 @@
+../Core/Src/common.c:33:20:bmp5_i2c_read	56	static
+../Core/Src/common.c:97:20:bmp5_i2c_write	48	static
+../Core/Src/common.c:133:6:bmp5_error_codes_print_result	16	static
+../Core/Src/common.c:173:6:bmp5_delay	24	static
+../Core/Src/common.c:187:8:init_bmp5_interface	48	static

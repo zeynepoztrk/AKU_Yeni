@@ -1,0 +1,12 @@
+../Core/Src/BMI088.c:13:9:BMI088_Init_I2C	48	static
+../Core/Src/BMI088.c:138:9:rollpitchyaw	48	static
+../Core/Src/BMI088.c:173:9:BMI088_ReadAccRegister	40	static
+../Core/Src/BMI088.c:178:9:BMI088_ReadGyrRegister	40	static
+../Core/Src/BMI088.c:183:9:BMI088_WriteAccRegister	32	static
+../Core/Src/BMI088.c:188:9:BMI088_WriteGyrRegister	32	static
+../Core/Src/BMI088.c:200:9:BMI088_ReadAccelerometer	56	static
+../Core/Src/BMI088.c:229:9:BMI088_ReadGyroscope	56	static
+../Core/Src/BMI088.c:263:9:BMI088_ReadAccelerometerDMA	24	static
+../Core/Src/BMI088.c:274:6:BMI088_ReadAccelerometerDMA_Complete	24	static
+../Core/Src/BMI088.c:287:9:BMI088_ReadGyroscopeDMA	24	static
+../Core/Src/BMI088.c:298:6:BMI088_ReadGyroscopeDMA_Complete	24	static

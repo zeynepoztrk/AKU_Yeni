@@ -1,0 +1,10 @@
+../Core/Src/freertos.c:103:13:vApplicationIdleHook	1
+../Core/Src/freertos.c:118:13:vApplicationTickHook	1
+../Core/Src/freertos.c:129:13:vApplicationMallocFailedHook	1
+../Core/Src/freertos.c:148:6:vApplicationGetIdleTaskMemory	1
+../Core/Src/freertos.c:162:6:MX_FREERTOS_Init	1
+../Core/Src/freertos.c:220:6:StartDefaultTask	1
+../Core/Src/freertos.c:238:6:BMI088_fonk	1
+../Core/Src/freertos.c:260:6:BMP581_fonk	1
+../Core/Src/freertos.c:279:6:Transmit_veri	3
+../Core/Src/freertos.c:317:6:SDfonk	6
