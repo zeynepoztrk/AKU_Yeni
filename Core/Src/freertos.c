@@ -36,6 +36,7 @@
 #include "fatfs.h"
 #include "ff.h"
 #include <stdbool.h>
+#include "tim.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -77,6 +78,7 @@ osThreadId YRT_BMI088Handle;
 osThreadId YRT_BMP581Handle;
 osThreadId YRT_TRANSMITHandle;
 osThreadId YRT_SDCARDHandle;
+osThreadId YRT_ServoMotorHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -88,6 +90,7 @@ void BMI088_fonk(void const * argument);
 void BMP581_fonk(void const * argument);
 void Transmit_veri(void const * argument);
 void SDfonk(void const * argument);
+void servo_fonk(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -204,6 +207,10 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(YRT_SDCARD, SDfonk, osPriorityNormal, 0, 512);
   YRT_SDCARDHandle = osThreadCreate(osThread(YRT_SDCARD), NULL);
 
+  /* definition and creation of YRT_ServoMotor */
+  osThreadDef(YRT_ServoMotor, servo_fonk, osPriorityNormal, 0, 512);
+  YRT_ServoMotorHandle = osThreadCreate(osThread(YRT_ServoMotor), NULL);
+
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -318,51 +325,80 @@ void SDfonk(void const * argument)
 {
   /* USER CODE BEGIN SDfonk */
 
-	bool isCardInserted = true;
-	extern SD_HandleTypeDef hsd;
-	  if (xSemaphoreTake(sdMutex, portMAX_DELAY) == pdTRUE) {
-	FATFS fs;
-	FIL file;
-	UINT bw;
-	FRESULT res;
-	 HAL_Delay(100);  // Kartı taktıktan sonra SDIO stabil hale gelsin
-
-	    if (HAL_SD_Init(&hsd) != HAL_OK) {
-	        printf("SD Init ERROR!\r\n");
-	        vTaskDelete(NULL);
-	    }
-
-	    if (f_mount(&fs, "0:", 1) != FR_OK) {
-	        printf("f_mount failed\r\n");
-	        vTaskDelete(NULL);
-	    }
-
-	    if (f_open(&file, "test.txt", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK) {
-	        f_write(&file, "Hello SD Card!\r\n", 17, &bw);
-	        f_close(&file);
-	        printf("SD Write Success\r\n");
-	    } else {
-	        printf("f_open failed\r\n");
-	    }
+//	bool isCardInserted = true;
+//	extern SD_HandleTypeDef hsd;
+//	  if (xSemaphoreTake(sdMutex, portMAX_DELAY) == pdTRUE) {
+//	FATFS fs;
+//	FIL file;
+//	UINT bw;
+//	FRESULT res;
+//	 HAL_Delay(100);  // Kartı taktıktan sonra SDIO stabil hale gelsin
+//
+//
+//	    if (HAL_SD_Init(&hsd) != HAL_OK) {
+//	        printf("SD Init ERROR!\r\n");
+//	        vTaskDelete(NULL);
+//	    }
+//
+//	    if (f_mount(&fs, "0:", 1) != FR_OK) {
+//	        printf("f_mount failed\r\n");
+//	        vTaskDelete(NULL);
+//	    }
+//
+//	    if (f_open(&file, "test.txt", FA_CREATE_ALWAYS | FA_WRITE) == FR_OK) {
+//	        f_write(&file, "Hello SD Card!\r\n", 17, &bw);
+//	        f_close(&file);
+//	        printf("SD Write Success\r\n");
+//	    } else {
+//	        printf("f_open failed\r\n");
+//	    }
 
   /* Infinite loop */
   for(;;)
   {
 
 
-	  	             // Dosyayı aç (yoksa oluştur)
-	  	             res = f_open(&file, "zeynep.txt", FA_OPEN_APPEND | FA_WRITE);
-	  	             if(res==FR_OK)
-	  	             {
-	  	            	f_write(&file, logBuf, strlen(logBuf), &bytesWritten);
-	  	            	 f_close(&file);
-	  	  	           xSemaphoreGive(sdMutex);
-
-	  	             }
-	  	         }
+//	  	             // Dosyayı aç (yoksa oluştur)
+//	  	             res = f_open(&file, "zeynep.txt", FA_OPEN_APPEND | FA_WRITE);
+//	  	             if(res==FR_OK)
+//	  	             {
+//	  	            	f_write(&file, logBuf, strlen(logBuf), &bytesWritten);
+//	  	            	 f_close(&file);
+//	  	  	           xSemaphoreGive(sdMutex);
+//
+//	  	             }
+//	  	         }
     osDelay(1);
   }
   /* USER CODE END SDfonk */
+}
+
+/* USER CODE BEGIN Header_servo_fonk */
+/**
+* @brief Function implementing the YRT_ServoMotor thread.
+* @param argument: Not used
+* @retval None
+*/
+/* USER CODE END Header_servo_fonk */
+void servo_fonk(void const * argument)
+{
+  /* USER CODE BEGIN servo_fonk */
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  /* Infinite loop */
+  for(;;)
+  {
+	  for(uint8_t angle=0;angle<=180;angle+=10){
+	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	  HAL_Delay(10);
+	  }
+	  for(uint8_t angle=180;angle>0;angle-=10){
+	  	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	  	  HAL_Delay(10);
+	  	  }
+
+    osDelay(1);
+  }
+  /* USER CODE END servo_fonk */
 }
 
 /* Private application code --------------------------------------------------*/

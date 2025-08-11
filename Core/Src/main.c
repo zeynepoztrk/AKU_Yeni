@@ -24,6 +24,7 @@
 #include "i2c.h"
 #include "sdio.h"
 #include "spi.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -61,7 +62,10 @@ void MX_FREERTOS_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void Set_Servo_Angle (TIM_HandleTypeDef *htim, uint32_t channel, uint8_t angle){
+	uint32_t pulse_lenght = 210 + (angle*(1050-210)/180);
+	__HAL_TIM_SET_COMPARE(htim,channel,pulse_lenght);
+}
 /* USER CODE END 0 */
 
 /**
@@ -99,6 +103,7 @@ int main(void)
   MX_SPI1_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_SD_DeInit(&hsd);
   HAL_Delay(10);
@@ -107,6 +112,7 @@ int main(void)
           f_mount(&SDFatFS, SDPath, 1);
       }
   }
+
 
   /* USER CODE END 2 */
 
