@@ -1,0 +1,2 @@
+../Core/Src/control.c:12:6:control_init	24	static
+../Core/Src/control.c:21:6:control_data	16	static

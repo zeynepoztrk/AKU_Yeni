@@ -68,8 +68,8 @@ all: main-build
 main-build: AKU_Yeni.elf secondary-outputs
 
 # Tool invocations
-AKU_Yeni.elf AKU_Yeni.map: $(OBJS) $(USER_OBJS) D:\roketworkspace\AKU_Yeni\STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "AKU_Yeni.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\roketworkspace\AKU_Yeni\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AKU_Yeni.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+AKU_Yeni.elf AKU_Yeni.map: $(OBJS) $(USER_OBJS) C:\Users\aliya\proje\AKU\AKU_Yeni\STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "AKU_Yeni.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\aliya\proje\AKU\AKU_Yeni\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="AKU_Yeni.map" -Wl,--gc-sections -static -u_printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

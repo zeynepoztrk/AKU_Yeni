@@ -37,6 +37,7 @@
 #include "ff.h"
 #include <stdbool.h>
 #include "tim.h"
+#include "control.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -245,14 +246,17 @@ void StartDefaultTask(void const * argument)
 void BMI088_fonk(void const * argument)
 {
   /* USER CODE BEGIN BMI088_fonk */
-	 BMI088_Init_I2C(&imu, &hi2c3, 0x18 << 1, 0x69 << 1);
+	//  BMI088_Init_I2C(&imu, &hi2c3, 0x18 << 1, 0x69 << 1);
   /* Infinite loop */
   for(;;)
   {
-	  BMI088_ReadAccelerometer(&imu);         
-	 	 	  BMI088_ReadGyroscope(&imu);
-	 	 	  rollpitchyaw(&imu);
-	 vTaskDelay(pdMS_TO_TICKS(50));
+
+	    // BMI088_ReadAccelerometer(&imu);         
+	 	// BMI088_ReadGyroscope(&imu);     /*BURADA ALINANA VERİLERİ SERVO TASK'INE GÖNDER*/
+      	// rollpitchyaw(&imu);
+
+
+	 vTaskDelay(pdMS_TO_TICKS(50));         
   }
   /* USER CODE END BMI088_fonk */
 }
@@ -383,18 +387,25 @@ void SDfonk(void const * argument)
 void servo_fonk(void const * argument)
 {
   /* USER CODE BEGIN servo_fonk */
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_1);
+  control_init(&imu);      /* BMI VE PWM INIT YAPILDI*/
+
+
   /* Infinite loop */
   for(;;)
   {
-	  for(uint8_t angle=0;angle<=180;angle+=10){
-	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
-	  HAL_Delay(10);
-	  }
-	  for(uint8_t angle=180;angle>0;angle-=10){
-	  	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
-	  	  HAL_Delay(10);
-	  	  }
+
+  control_data(imu);
+	  // for(uint8_t angle=0;angle<=180;angle+=10){
+	  // Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	  // HAL_Delay(10);
+	  // }
+	  // for(uint8_t angle=180;angle>0;angle-=10){
+	  // 	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	  // 	  HAL_Delay(10);
+	  // 	  }
+
+
+
 
     osDelay(1);
   }

@@ -2,6 +2,7 @@
 "./Core/Src/LoRa.o"
 "./Core/Src/bmp5.o"
 "./Core/Src/common.o"
+"./Core/Src/control.o"
 "./Core/Src/dma.o"
 "./Core/Src/freertos.o"
 "./Core/Src/gpio.o"

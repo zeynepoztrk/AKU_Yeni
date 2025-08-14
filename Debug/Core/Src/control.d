@@ -1,13 +1,4 @@
-Core/Src/freertos.o: ../Core/Src/freertos.c \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h \
- ../Core/Inc/FreeRTOSConfig.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h \
+Core/Src/control.o: ../Core/Src/control.c ../Core/Inc/control.h \
  ../Core/Inc/main.h ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Core/Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -40,35 +31,8 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h \
- ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h \
- ../Core/Inc/LoRa.h ../Core/Inc/main.h ../Core/Inc/BMI088.h \
- ../Core/Inc/bmp5_defs.h ../Core/Inc/bmp5.h ../Core/Inc/bmp5_defs.h \
- ../Core/Inc/common.h ../Core/Inc/bmp5.h ../Core/Inc/i2c.h \
- ../Core/Inc/spi.h ../FATFS/App/fatfs.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/tim.h ../Core/Inc/control.h ../Core/Inc/BMI088.h \
- ../Core/Inc/tim.h ../Core/Inc/i2c.h
-../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
-../Core/Inc/FreeRTOSConfig.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h:
-../Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/list.h:
+ ../Core/Inc/BMI088.h ../Core/Inc/tim.h ../Core/Inc/i2c.h
+../Core/Inc/control.h:
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -102,36 +66,6 @@ Core/Src/freertos.o: ../Core/Src/freertos.c \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
-../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/task.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h:
-../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h:
-../Core/Inc/LoRa.h:
-../Core/Inc/main.h:
-../Core/Inc/BMI088.h:
-../Core/Inc/bmp5_defs.h:
-../Core/Inc/bmp5.h:
-../Core/Inc/bmp5_defs.h:
-../Core/Inc/common.h:
-../Core/Inc/bmp5.h:
-../Core/Inc/i2c.h:
-../Core/Inc/spi.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../FATFS/Target/bsp_driver_sd.h:
-../FATFS/Target/fatfs_platform.h:
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/sd_diskio.h:
-../Core/Inc/tim.h:
-../Core/Inc/control.h:
 ../Core/Inc/BMI088.h:
 ../Core/Inc/tim.h:
 ../Core/Inc/i2c.h:
