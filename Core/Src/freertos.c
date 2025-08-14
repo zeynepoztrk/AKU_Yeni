@@ -249,7 +249,7 @@ void BMI088_fonk(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  BMI088_ReadAccelerometer(&imu);
+	  BMI088_ReadAccelerometer(&imu);         
 	 	 	  BMI088_ReadGyroscope(&imu);
 	 	 	  rollpitchyaw(&imu);
 	 vTaskDelay(pdMS_TO_TICKS(50));
