@@ -387,16 +387,15 @@ void servo_fonk(void const * argument)
   /* Infinite loop */
   for(;;)
   {
-	  for(uint8_t angle=0;angle<=180;angle+=10){
-	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
-	  HAL_Delay(10);
-	  }
-	  for(uint8_t angle=180;angle>0;angle-=10){
-	  	  Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
-	  	  HAL_Delay(10);
-	  	  }
+	  for(uint8_t angle=0; angle<=180; angle+=10){
+	        Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	        osDelay(20); // FreeRTOS bekleme
+	      }
+	      for(int angle=180; angle>=0; angle-=10){
+	        Set_Servo_Angle(&htim2, TIM_CHANNEL_1, angle);
+	        osDelay(20);
+	      }
 
-    osDelay(1);
   }
   /* USER CODE END servo_fonk */
 }

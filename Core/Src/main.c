@@ -63,9 +63,13 @@ void MX_FREERTOS_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void Set_Servo_Angle (TIM_HandleTypeDef *htim, uint32_t channel, uint8_t angle){
-	uint32_t pulse_lenght = 210 + (angle*(1050-210)/180);
-	__HAL_TIM_SET_COMPARE(htim,channel,pulse_lenght);
+    uint32_t min_us = 1000; // 1 ms
+    uint32_t max_us = 2000; // 2 ms
+    uint32_t pulse_us = min_us + ((uint32_t)(max_us - min_us) * angle) / 180U;
+    if (pulse_us > max_us) pulse_us = max_us;
+    __HAL_TIM_SET_COMPARE(htim, channel, pulse_us); // çünkü PSC ile 1 tick = 1 us
 }
+
 /* USER CODE END 0 */
 
 /**
